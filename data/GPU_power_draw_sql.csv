@@ -1,0 +1,99 @@
+Manufacturer,Card Name,TDP
+Nvidia,GeForce RTX 4090,315
+Nvidia,GeForce RTX 4080 SUPER,246
+Nvidia,GeForce RTX 4080,251
+Nvidia,GeForce RTX 4070 Ti SUPER,226
+Nvidia,GeForce RTX 4070 Ti,226
+Nvidia,GeForce RTX 4070 SUPER,200
+Nvidia,GeForce RTX 4070,186
+Nvidia,GeForce RTX 4060 Ti,140
+Nvidia,GeForce RTX 4060,110
+Nvidia,GeForce RTX 3090 Ti,450
+Nvidia,GeForce RTX 3090,350
+Nvidia,GeForce RTX 3080 Ti,350
+Nvidia,GeForce RTX 3080 (12 GB),350
+Nvidia,GeForce RTX 3080,320
+Nvidia,GeForce RTX 3070 Ti,290
+Nvidia,GeForce  RTX 3070,220
+Nvidia,GeForce  RTX 3060 Ti,200
+Nvidia,GeForce RTX 3060,170
+Nvidia,GeForce  RTX 3050 (8 GB),130
+Nvidia,GeForce  RTX 3050 (6 GB),70
+Nvidia,GeForce RTX 2080 Ti,260
+Nvidia,GeForce RTX 2080 Super,250
+Nvidia,GeForce RTX 2080,225
+Nvidia,GeForce RTX 2070 Super,215
+Nvidia,GeForce RTX 2070,185
+Nvidia,GeForce RTX 2060 Super,175
+Nvidia,GeForce RTX 2060 (12 GB),185
+Nvidia,GeForce RTX 2060 (6 GB),160
+Nvidia,GeForce  GTX 1660 Ti,260
+Nvidia,GeForce  GTX 1660 Super,250
+Nvidia,GeForce GTX 1660,225
+Nvidia,GeForce  GTX 1650 Super,215
+Nvidia,GeForce GTX 1650 (G5),185
+Nvidia,GeForce  GTX 1650 (G6),175
+Nvidia,GeForce  GTX 1630,75
+Nvidia,GeForce GTX 1080 Ti,250
+Nvidia,GeForce GTX 1080,180
+Nvidia,GeForce GTX 1070 Ti,180
+Nvidia,GeForce GTX 1070,150
+Nvidia,GeForce GTX 1060 (6 GB),120
+Nvidia,GeForce GTX 1060 (3 GB),120
+Nvidia,GeForce GTX 1050 Ti,75
+Nvidia,GeForce GTX 1050 (3 GB),75
+Nvidia,GeForce GTX 1050 (2 GB),75
+Nvidia,GeForce GTX 980 Ti,250
+Nvidia,GeForce GTX 980,165
+Nvidia,GeForce GTX 970,145
+Nvidia,GeForce GTX 960,120
+Nvidia,GeForce GTX 950,90
+AMD, Radeon™ RX 7900 XTX,355
+AMD, Radeon™ RX 7900 XT,315
+AMD, Radeon™ RX 7900 GRE,260
+AMD, Radeon™ RX 7800 XT,263
+AMD, Radeon™ RX 7700 XT,245
+AMD, Radeon™ RX 7600 XT,190
+AMD, Radeon™ RX 7600,165
+AMD, Radeon™ RX 6950 XT,335
+AMD, Radeon™ RX 6900 XT,300
+AMD, Radeon™ RX 6800 XT Midnight Black,300
+AMD, Radeon™ RX 6800 XT,300
+AMD, Radeon™ RX 6800,250
+AMD, Radeon™ RX 6750 XT,250
+AMD, Radeon™ RX 6700 XT,230
+AMD, Radeon™ RX 6700,175
+AMD, Radeon™ RX 6650 XT,180
+AMD, Radeon™ RX 6600 XT,160
+AMD, Radeon™ RX 6600,132
+AMD, Radeon™ RX 6500 XT,113
+AMD, Radeon™ RX 6500 XT (4GB),107
+AMD, Radeon™ RX 6400,53
+AMD, Radeon™ RX 5700 XT 50th Anniversary,235
+AMD, Radeon™ RX 5700 XT,225
+AMD, Radeon™ RX 5700,180
+AMD, Radeon™ RX 5600 XT,150
+AMD, Radeon™ RX 5600,150
+AMD, Radeon™ RX 5500 XT,130
+AMD, Radeon™ RX 5500,150
+AMD, Radeon™ RX 5300,100
+AMD, Radeon™ VII,300
+AMD,Radeon™ RX Vega 64 Liquid Cooled,345
+AMD,Radeon™ RX Vega 64,295
+AMD,Radeon™ RX Vega 56,210
+AMD,Radeon™ RX 590,175
+AMD,Radeon™ RX 580,185
+AMD,Radeon™ RX 570,150
+AMD,Radeon™ RX 560,75
+AMD,Radeon™ RX 550,50
+AMD, Radeon™ RX 480,150
+AMD,Radeon™ RX 470,120
+AMD,Radeon™ RX 460,70
+AMD, Radeon™ R9 Fury X,275
+AMD, Radeon™ R9 Fury,275
+AMD, Radeon™ R9 Nano,175
+Intel, Arc™ A770 Graphics 16GB,225
+Intel, Arc™ A770 Graphics 8GB,225
+Intel, Arc™ A750 Graphics ,225
+Intel, Arc™ A380,75
+Intel, Arc™ A310 Graphics ,75
