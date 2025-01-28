@@ -1,4 +1,3 @@
-// src/components/PowerUsage.tsx
 import { useQuery } from '@tanstack/react-query';
 import { fetchElectricityData } from '../api/eiaApi';
 
@@ -17,11 +16,34 @@ export default function PowerUsage() {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {(error as Error).message}</div>;
 
+  // Process data to get the most recent residential price for each state
+  const mostRecentPerState = data.response.data
+    .filter((item: any) => item.sectorid === 'RES' && item.stateid.length === 2)
+    .reduce((acc: Record<string, any>, item: any) => {
+      const state = item.stateid;
+      const currentDate = new Date(item.period);
+      if (!acc[state] || currentDate > new Date(acc[state].period)) {
+        acc[state] = item;
+      }
+      return acc;
+    }, {});
+
+  const result = Object.values(mostRecentPerState).map((item: any) => ({
+    state: item.stateid,
+    price: `$${item.price} per kWh`,
+    period: item.period
+  }));
+
   return (
     <div>
-      <h1>Monthly Power Usage</h1>
-      {/* Render your data */}
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      <h1>Most Recent Residential Price per State</h1>
+      <ul>
+        {result.map((item) => (
+          <li key={item.state}>
+            {item.state}: {item.price} (as of {item.period})
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
