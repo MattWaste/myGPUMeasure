@@ -1,10 +1,17 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+// src/App.tsx
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import PowerUsage from './components/PowerUsage';
 
-// Create a client
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 3,
+      staleTime: 1000 * 60 * 5, // 5 minutes
+    },
+  },
+});
 
-function App() {
+export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="min-h-screen bg-gray-100">
@@ -15,10 +22,6 @@ function App() {
         </nav>
         <main className="p-4">
           <div className="max-w-4xl p-6 mx-auto bg-white rounded-lg shadow-md">
-            <h2 className="mb-4 text-xl font-semibold">Welcome to GPU Measure</h2>
-            <p className="text-gray-600">
-              A simple and efficient way to monitor your GPU performance.
-            </p>
             <PowerUsage />
           </div>
         </main>
@@ -26,5 +29,3 @@ function App() {
     </QueryClientProvider>
   );
 }
-
-export default App; 

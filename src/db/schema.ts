@@ -1,10 +1,8 @@
-import { sqliteTable, text, integer,} from 'drizzle-orm/sqlite-core';
+import { pgTable, serial, text, integer } from 'drizzle-orm/pg-core';
 
-export const gpus = sqliteTable('gpus', {
-  id: integer('id').primaryKey({ autoIncrement: true }),
+export const gpus = pgTable('gpus', {
+  id: serial('id').primaryKey(),
   manufacturer: text('manufacturer').notNull(),
   name: text('name').notNull(),
-  tdp: integer('tdp'), // in watts  
+  tdp: integer('tdp')
 });
-
-export const schema = { gpus };

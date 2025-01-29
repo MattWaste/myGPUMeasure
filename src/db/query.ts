@@ -1,10 +1,12 @@
 import { db } from '../index';
 import { gpus } from './schema';
 
-async function queryGPUs() {
+export async function queryGPUs() {
   const allGPUs = await db.select().from(gpus);
   console.log('All GPUs in database:');
   console.table(allGPUs);
+  return allGPUs
 }
 
-queryGPUs().catch(console.error); 
+// Remove the following line to prevent immediate execution
+// queryGPUs().catch(console.error);@
