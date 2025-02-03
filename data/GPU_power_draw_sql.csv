@@ -1,4 +1,11 @@
 Manufacturer,Card Name,TDP
+Nvidia,GeForce RTX 5090,575
+Nvidia,GeForce RTX 5080,360
+Nvidia,GeForce RTX 5070 Ti,300
+Nvidia,GeForce RTX 5070,250
+Nvidia,H100,700
+Nvidia,A100,300
+Nvidia,RTX A6000,300
 Nvidia,GeForce RTX 4090,315
 Nvidia,GeForce RTX 4080 SUPER,246
 Nvidia,GeForce RTX 4080,251
@@ -48,6 +55,9 @@ Nvidia,GeForce GTX 980,165
 Nvidia,GeForce GTX 970,145
 Nvidia,GeForce GTX 960,120
 Nvidia,GeForce GTX 950,90
+AMD,Radeon™ PRO W7900,295
+AMD,Radeon™ PRO W7800,260
+AMD,Radeon™ PRO W7700,190
 AMD, Radeon™ RX 7900 XTX,355
 AMD, Radeon™ RX 7900 XT,315
 AMD, Radeon™ RX 7900 GRE,260
@@ -92,6 +102,10 @@ AMD,Radeon™ RX 460,70
 AMD, Radeon™ R9 Fury X,275
 AMD, Radeon™ R9 Fury,275
 AMD, Radeon™ R9 Nano,175
+Intel, Arc™ Arc B580,190
+Intel, Arc™ Arc B570,150
+Intel, Arc™ Arc A580,185
+Intel, Arc™ Arc Pro A60,130
 Intel, Arc™ A770 Graphics 16GB,225
 Intel, Arc™ A770 Graphics 8GB,225
 Intel, Arc™ A750 Graphics ,225

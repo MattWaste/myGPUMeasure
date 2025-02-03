@@ -2,6 +2,8 @@ FROM postgres:15
 
 # Copy the CSV file
 COPY ./data/GPU_power_draw_sql.csv /docker-entrypoint-initdb.d/
+COPY ./data/electricity_prices.csv /docker-entrypoint-initdb.d/
+
 
 # Set environment variables
 ENV POSTGRES_USER=postgres
