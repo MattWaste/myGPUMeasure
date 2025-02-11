@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import PowerUsage from './components/PowerUsage';
+import {FaMoon, FaSun} from 'react-icons/fa'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -37,19 +38,31 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className={`min-h-screen ${backgroundClass}`}>
-        <nav className="bg-white shadow-lg dark:bg-gray-800">
-          <div className="flex items-center justify-between px-8 py-6">
-            <h1 className="text-4xl font-extrabold dark:text-white"> My GPU Measure</h1>
-            <button 
-              onClick={() => setDarkMode(!darkMode)} 
-              className="px-4 py-2 bg-gray-100 border rounded hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600"
-            >
-              {darkMode ? 'Light Mode' : 'Dark Mode'}
-            </button>
-          </div>
-        </nav>
-        <main className="p-8">
-          <div className="max-w-6xl p-10 mx-auto bg-white rounded-lg shadow-xl dark:bg-gray-900">
+      <nav className="bg-white shadow-lg dark:bg-gray-800">
+  <div className="flex items-center justify-between px-8 py-6">
+    <h1 className="text-4xl dark:text-white"> My GPU Measure</h1>
+    <div className="flex items-center space-x-4">
+      <a 
+        href="https://mattewest.com/"
+        className="block p-2 rounded-full dark:hover:bg-gray-600 hover:bg-gray-200"
+      >
+        <img 
+          src="src/content/slice_Blue@2x.png" 
+          alt="Slice Blue" 
+          className="object-cover w-12 h-12 rounded-full min-w-12 min-h-12"
+        />
+      </a>
+      <button 
+        onClick={() => setDarkMode(!darkMode)} 
+        className="flex items-center justify-center px-4 py-2 bg-gray-100 border rounded hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600"
+      >
+        {darkMode ? <FaSun className="text-xl" /> : <FaMoon className="text-xl" />}
+      </button>
+    </div>
+  </div>
+</nav>
+        <main className="p-5 md:p-8">
+          <div className="max-w-6xl p-10 mx-auto bg-white rounded-lg shadow-xl max-md:p-5 dark:bg-gray-900">
             <PowerUsage 
               selectedGPUCompany={selectedGPUCompany} 
               onCompanyChange={setSelectedGPUCompany} 

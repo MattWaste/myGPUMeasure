@@ -112,113 +112,123 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
 
   return (
     <div className="container p-4 mx-auto dark:text-gray-100">
-      <h1 className="mb-4 text-2xl font-bold text-center dark:text-white">Power Usage</h1>
-
+      <h2 className="mb-4 text-2xl text-center dark:text-white atkinson-hyperlegible-mono-bold">
+        Configure Your Setup
+      </h2>
       {/* Inline Sentence Filters Section */}
       <section className="p-4 mb-6 border dark:border-gray-700">
-        <h2 className="mb-4 text-xl font-bold text-center dark:text-white">Configure Your Setup</h2>
-        <div className="space-x-2 text-center">
-          <span>Using</span>
-          <select
-            value={selectedGPUCompany}
-            onChange={(e) => {
-              onCompanyChange(e.target.value);
-              setSelectedGPUModel("");
-            }}
-            className="px-2 py-1 border rounded dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600"
-          >
-            {gpuCompanies.map((company) => (
-              <option key={company} value={company}>{company}</option>
-            ))}
-          </select>
-          <span>GPU</span>
-          <select
-            value={selectedGPUModel}
-            onChange={(e) => setSelectedGPUModel(e.target.value)}
-            disabled={!selectedGPUCompany}
-            className="px-2 py-1 border rounded dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600"
-          >
-            <option value="">Select Model</option>
-            {gpuModels.map((model) => (
-              <option key={model} value={model}>{model}</option>
-            ))}
-          </select>
-          <span>with a daily usage of</span>
-          <select
-            value={gpuDailyUseage}
-            onChange={(e) => setGpuDailyUseage(Number(e.target.value))}
-            className="px-2 py-1 border rounded dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600"
-          >
-            <option value={1}>1 hr</option>
-            <option value={2}>2 hrs</option>
-            <option value={3}>3 hrs</option>
-            <option value={4}>4 hrs</option>
-            <option value={5}>5 hrs</option>
-            <option value={6}>6 hrs</option>
-            <option value={7}>7 hrs</option>
-            <option value={8}>8 hrs</option>
-            <option value={9}>9 hrs</option>
-            <option value={10}>10 hrs</option>
-            <option value={11}>11 hrs</option>
-            <option value={12}>12 hrs</option>
-            <option value={13}>13 hrs</option>
-            <option value={14}>14 hrs</option>
-            <option value={15}>15 hrs</option>
-            <option value={16}>16 hrs</option>
-            <option value={17}>17 hrs</option>
-            <option value={18}>18 hrs</option>
-            <option value={19}>19 hrs</option>
-            <option value={20}>20 hrs</option>
-            <option value={21}>21 hrs</option>
-            <option value={22}>22 hrs</option>
-            <option value={23}>23 hrs</option>
-            <option value={24}>24 hrs</option>
-          </select>
-          <span>, running at a</span>
-          <select
-            value={gpuWorkload}
-            onChange={(e) => setGpuWorkload(Number(e.target.value))}
-            className="px-2 py-1 border rounded dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600"
-          >
-            <option value={0.15}>Light load* (.15)</option>
-            <option value={0.6}>Medium load* (.6)</option>
-            <option value={1}>Heavy load* (1)</option>
-          </select>
-          <span>in</span>
-          <select
-            value={selectedCountry}
-            onChange={(e) => {
-              setSelectedCountry(e.target.value);
-              setSelectedState("");
-            }}
-            className="px-2 py-1 border rounded dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600"
-          >
-            <option value="USA">USA</option>
-            {countryOptions
-              .filter((country) => country !== "USA")
-              .map((country) => (
-                <option key={country} value={country}>{country}</option>
+        <div className="flex flex-col space-y-2 text-left">
+          <div className="flex flex-col">
+            <span className='text-xl'>Make:</span>
+            <select
+              value={selectedGPUCompany}
+              onChange={(e) => {
+                onCompanyChange(e.target.value);
+                setSelectedGPUModel("");
+              }}
+              className="px-2 py-1 border rounded dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600"
+            >
+              {gpuCompanies.map((company) => (
+                <option key={company} value={company}>{company}</option>
               ))}
-          </select>
-          <span>, state</span>
-          <select
-            value={selectedState}
-            onChange={(e) => {
-              setSelectedState(e.target.value);
-            }}
-            className="px-2 py-1 border rounded dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600"
-          >
-            <option value="">Select State</option>
-            {stateOptions.map((state) => (
-              <option key={state} value={state}>{state}</option>
-            ))}
-          </select>
+            </select>
+          </div>
+          <div className="flex flex-col">
+            <span className='text-xl'>Model:</span>
+            <select
+              value={selectedGPUModel}
+              onChange={(e) => setSelectedGPUModel(e.target.value)}
+              disabled={!selectedGPUCompany}
+              className="px-2 py-1 border rounded dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600"
+            >
+              <option value="">Select Model</option>
+              {gpuModels.map((model) => (
+                <option key={model} value={model}>{model}</option>
+              ))}
+            </select>
+          </div>
+          <div className="flex flex-col">
+            <span className='text-xl'>Usage (daily hrs):</span>
+            <select
+              value={gpuDailyUseage}
+              onChange={(e) => setGpuDailyUseage(Number(e.target.value))}
+              className="px-2 py-1 border rounded dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600"
+            >
+              <option value={1}>1 hr</option>
+              <option value={2}>2 hrs</option>
+              <option value={3}>3 hrs</option>
+              <option value={4}>4 hrs</option>
+              <option value={5}>5 hrs</option>
+              <option value={6}>6 hrs</option>
+              <option value={7}>7 hrs</option>
+              <option value={8}>8 hrs</option>
+              <option value={9}>9 hrs</option>
+              <option value={10}>10 hrs</option>
+              <option value={11}>11 hrs</option>
+              <option value={12}>12 hrs</option>
+              <option value={13}>13 hrs</option>
+              <option value={14}>14 hrs</option>
+              <option value={15}>15 hrs</option>
+              <option value={16}>16 hrs</option>
+              <option value={17}>17 hrs</option>
+              <option value={18}>18 hrs</option>
+              <option value={19}>19 hrs</option>
+              <option value={20}>20 hrs</option>
+              <option value={21}>21 hrs</option>
+              <option value={22}>22 hrs</option>
+              <option value={23}>23 hrs</option>
+              <option value={24}>24 hrs</option>
+            </select>
+          </div>
+          <div className="flex flex-col">
+            <span className='text-xl'>Load:</span>
+            <select
+              value={gpuWorkload}
+              onChange={(e) => setGpuWorkload(Number(e.target.value))}
+              className="px-2 py-1 border rounded dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600"
+            >
+              <option value={0.15}>Light* (.15)</option>
+              <option value={0.6}>Medium* (.6)</option>
+              <option value={1}>Heavy* (1)</option>
+            </select>
+          </div>
+          <div className="flex flex-col">
+            <span className='text-xl'>Country:</span>
+            <select
+              value={selectedCountry}
+              onChange={(e) => {
+                setSelectedCountry(e.target.value);
+                setSelectedState("");
+              }}
+              className="px-2 py-1 border rounded dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600"
+            >
+              <option value="USA">USA</option>
+              {countryOptions
+                .filter((country) => country !== "USA")
+                .map((country) => (
+                  <option key={country} value={country}>{country}</option>
+                ))}
+            </select>
+          </div>
+          <div className="flex flex-col">
+            <span className='text-xl'>State:</span>
+            <select
+              value={selectedState}
+              onChange={(e) => setSelectedState(e.target.value)}
+              className="px-2 py-1 border rounded dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600"
+            >
+              <option value="">Select State</option>
+              {stateOptions.map((state) => (
+                <option key={state} value={state}>{state}</option>
+              ))}
+            </select>
+          </div>
         </div>
       </section>
 
       {/* GPU Data Section */}
       <section>
-        <h2 className="mb-2 text-xl font-bold text-center dark:text-white">
+        <h2 className="mb-2 text-xl text-center dark:text-white">
           GPU Power Costs in {locationLabel}
         </h2>
         <ul className="space-y-2">
@@ -260,19 +270,25 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
         <div className="text-center dark:text-white">
         Pricing last Updated: {currentRecord ? currentRecord.period : "N/A"}
         </div>
-        <div className="text-center dark:text-white">
-          *Light = streaming (1080, some 4k), browsing, word processing, etc.<br></br>
-          *Medium = casual gaming, 3D rendering (not real-time), light parallel computing etc.<br></br>
-          *Heavy = AAA gaming, AI training, 3D rendering (realtime), heavy video editing, crypto mining etc.<br></br>
-          <br></br>
-<br></br>
-<button
+        <br></br>
+    
+        <button
   onClick={() => setShowSources(prev => !prev)}
-  className="px-2 py-1 mb-2 border rounded dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600"
+  className="block px-2 py-1 mx-auto mb-2 border rounded dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600"
 >
-  {showSources ? "Hide Sources" : "Show Sources"}
+  {showSources ? "Hide Details" : "Show Details"}
 </button>
 {showSources && (
+<>
+<div className="text-center dark:text-white">
+<br></br>
+*Light = streaming (1080, some 4k), browsing, word processing, etc.<br></br>
+*Medium = casual gaming, 3D rendering (not real-time), light parallel computing etc.<br></br>
+*Heavy = AAA gaming, AI training, 3D rendering (realtime), heavy video editing, crypto mining etc.<br></br>
+<br></br>
+</div>
+
+  
   <div className="italic text-center dark:text-white">
     U.S. Energy Information Administration, Form EIA-861M, 'Monthly Electric Sales and Revenue With State Distributions Report.'
     U.S. Energy Information Administration, Form EIA-923, 'Power Plant Operations Report.'
@@ -282,8 +298,8 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
     <br></br>
     <br></br>
     GlobalPetrolPrices.com. "Electricity Prices." GlobalPetrolPrices.com, 2025, https://www.globalpetrolprices.com/electricity_prices/.
-  </div>)}
-        </div>
+  </div>
+  </> )}
       </section>
     </div>
   );

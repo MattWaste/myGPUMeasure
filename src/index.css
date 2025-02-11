@@ -1,3 +1,26 @@
+/* Ensure you load the font via a link or @import if necessary */
 @tailwind base;
 @tailwind components;
-@tailwind utilities; 
+@tailwind utilities;
+
+.atkinson-hyperlegible-mono {  /* replaced <uniquifier> with "bold" and <weight> with 700 */
+    font-family: "Atkinson Hyperlegible Mono", serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: bold;
+}
+
+
+.roboto-mono- {
+  font-family: "Roboto Mono", serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: bold;
+}
+
+
+
+
+h1,h2{
+    font-family: "Roboto Mono", serif;
+}
