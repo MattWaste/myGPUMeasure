@@ -80,8 +80,8 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
 
   // Update the currentRecord and effectivePrice logic:
   const currentRecord = selectedCountry !== 'USA'
-    ? internationalData.find(item => item.country === selectedCountry)
-    : electricityData.find(item => item.state === selectedState);
+  ? internationalData.find((item: InternationalElectricityPrice) => item.country === selectedCountry)
+  : electricityData.find((item: ElectricityPrice) => item.state === selectedState);
 
   const effectivePrice = currentRecord
     ? selectedCountry !== 'USA'
@@ -94,16 +94,15 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
 
   // Derive distinct dropdown options:
   // GPU Company options from gpuData manufacturer property
-  const gpuCompanies = Array.from(new Set(gpuData.map((gpu: any) => gpu.manufacturer)));
+  const gpuCompanies: string[] = Array.from(new Set(gpuData.map((gpu: any) => String(gpu.manufacturer))));
   // GPU Model options filtered by selected company.
   const filteredGPUModels = selectedGPUCompany
     ? gpuData.filter((gpu: any) => gpu.manufacturer === selectedGPUCompany)
     : gpuData;
-  const gpuModels = Array.from(new Set(filteredGPUModels.map((gpu: any) => gpu.name)));
-  // State options from domestic electricityData
-  const stateOptions = Array.from(new Set(electricityData.map(item => item.state)));
-  // Country options from internationalData
-  const countryOptions = Array.from(new Set(internationalData.map(item => item.country)));
+  const gpuModels: string[] = Array.from(new Set(filteredGPUModels.map((gpu: any) => String(gpu.name))));
+  
+  const stateOptions: string[] = Array.from(new Set(electricityData.map((item: ElectricityPrice) => item.state)));
+const countryOptions: string[] = Array.from(new Set(internationalData.map((item: InternationalElectricityPrice) => item.country)));
 
   // Build location label: if country is USA then include state, otherwise, just the country.
   const locationLabel = selectedCountry === 'USA' && selectedState 
@@ -128,7 +127,7 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
               }}
               className="px-2 py-1 border rounded dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600"
             >
-              {gpuCompanies.map((company) => (
+              {gpuCompanies.map((company: string) => (
                 <option key={company} value={company}>{company}</option>
               ))}
             </select>
@@ -142,7 +141,7 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
               className="px-2 py-1 border rounded dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600"
             >
               <option value="">Select Model</option>
-              {gpuModels.map((model) => (
+              {gpuModels.map((model: string) => (
                 <option key={model} value={model}>{model}</option>
               ))}
             </select>
@@ -205,7 +204,7 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
               <option value="USA">USA</option>
               {countryOptions
                 .filter((country) => country !== "USA")
-                .map((country) => (
+                .map((country: string) => (
                   <option key={country} value={country}>{country}</option>
                 ))}
             </select>
@@ -218,7 +217,7 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
               className="px-2 py-1 border rounded dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600"
             >
               <option value="">Select State</option>
-              {stateOptions.map((state) => (
+              {stateOptions.map((state: string) => (
                 <option key={state} value={state}>{state}</option>
               ))}
             </select>
@@ -252,7 +251,7 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
                     Annual Cost: ${annualCost.toFixed(2)}<br />
                     {selectedCountry === 'USA' ? (
                       <div>
-                        Annual Carbon Cost: {annualCarbonCost.toFixed(2)} lb CO₂/kWh
+                        Annual Carbon Cost: {annualCarbonCost.toFixed(2)} lbs of CO₂
                       </div>
                     ) : (
                       <div>

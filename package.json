@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && docker start gpu-database", 
     "preview": "vite preview",
     "server": "tsx src/index.ts",
     "start": "concurrently \"npm run server\" \"npm run dev\" \"docker start gpu-database \""
