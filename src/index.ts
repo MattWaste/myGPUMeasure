@@ -28,7 +28,7 @@ pool.connect()
 // Export the db instance
 export const db = drizzle(pool, { schema });
 
-app.get('/api/gpus', async (req, res) => {
+app.get('/api/gpus', async (_req, res) => {
   try {
     const gpus = await db.select().from(schema.gpus);
     res.json(gpus);
