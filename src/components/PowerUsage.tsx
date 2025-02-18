@@ -102,8 +102,8 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
   const gpuModels: string[] = Array.from(new Set(filteredGPUModels.map((gpu: any) => String(gpu.name))));
   
   const stateOptions: string[] = Array.from(
-    new Set(electricityData.map((item: ElectricityPrice) => String(item.state)))
-  ).sort()
+    new Set((electricityData as ElectricityPrice[]).map(item => String(item.state)))
+  ).sort((a, b) => a.localeCompare(b));
   const countryOptions: string[] = Array.from(new Set(internationalData.map((item: InternationalElectricityPrice) => item.country)));
 
   // Build location label: if country is USA then include state, otherwise, just the country.
