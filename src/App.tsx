@@ -47,7 +47,7 @@ export default function App() {
         className="block p-2 rounded-full dark:hover:bg-gray-600 hover:bg-gray-200"
       >
         <img 
-          src="src/content/slice_Blue@2x.png" 
+          src="./public/slice_Blue@2x.png" 
           alt="Slice Blue" 
           className="object-cover w-12 h-12 rounded-full min-w-12 min-h-12"
         />

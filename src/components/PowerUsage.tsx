@@ -35,7 +35,7 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
   const { data: electricityData, isLoading: electricityLoading, error: electricityError } = useQuery<ElectricityPrice[]>({
     queryKey: ['electricityPrices'],
     queryFn: async () => {
-      const res = await fetch('/data/electricity_prices.csv');
+      const res = await fetch('../public/electricity_prices.csv');
       const text = await res.text();
       const lines = text.split('\n').filter(line => line.trim());
       const header = lines[0].split(',').map(h => h.trim());
@@ -52,7 +52,7 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
   const { data: internationalData, isLoading: internationalLoading, error: internationalError } = useQuery<InternationalElectricityPrice[]>({
     queryKey: ['internationalElectricityPrices'],
     queryFn: async () => {
-      const res = await fetch('/data/international_power_draw_6_2024.csv');
+      const res = await fetch('../public/international_power_draw_6_2024.csv');
       const text = await res.text();
       const lines = text.split('\n').filter(line => line.trim());
       const header = lines[0].split(',').map(h => h.trim());
