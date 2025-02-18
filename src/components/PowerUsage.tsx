@@ -94,8 +94,9 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
 
   // Derive distinct dropdown options:
   // GPU Company options from gpuData manufacturer property
-  const gpuCompanies: string[] = Array.from(new Set(gpuData.map((gpu: any) => String(gpu.manufacturer))));
-  // GPU Model options filtered by selected company.
+  const gpuCompanies: string[] = Array.from(
+    new Set(gpuData.map((gpu: any) => String(gpu.manufacturer)))
+  ).sort((a, b) => a.localeCompare(b));  // GPU Model options filtered by selected company.
   const filteredGPUModels = selectedGPUCompany
     ? gpuData.filter((gpu: any) => gpu.manufacturer === selectedGPUCompany)
     : gpuData;
@@ -104,7 +105,10 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
   const stateOptions: string[] = Array.from(
     new Set((electricityData as ElectricityPrice[]).map(item => String(item.state)))
   ).sort((a, b) => a.localeCompare(b));
+  
   const countryOptions: string[] = Array.from(new Set(internationalData.map((item: InternationalElectricityPrice) => item.country)));
+
+  
 
   // Build location label: if country is USA then include state, otherwise, just the country.
   const locationLabel = selectedCountry === 'USA' && selectedState 
