@@ -94,9 +94,12 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
 
   // Derive distinct dropdown options:
   // GPU Company options from gpuData manufacturer property
-  const gpuCompanies: string[] = Array.from(
-    new Set(gpuData.map((gpu: any) => String(gpu.manufacturer)))
-  ).sort((a, b) => a.localeCompare(b));  // GPU Model options filtered by selected company.
+  const gpuCompanies: string[] = [
+    ...new Set<string>(gpuData.map((gpu: any) => String(gpu.manufacturer)))
+  ].sort((a: string, b: string) => a.localeCompare(b));
+  
+  
+  
   const filteredGPUModels = selectedGPUCompany
     ? gpuData.filter((gpu: any) => gpu.manufacturer === selectedGPUCompany)
     : gpuData;
