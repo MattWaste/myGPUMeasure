@@ -2,7 +2,7 @@
 set -e  # Exit if any command fails
 
 echo "Pulling latest code..."
-git pull origin main
+git pull origin master
 
 echo "Installing dependencies..."
 npm install
