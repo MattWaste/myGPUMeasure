@@ -17,6 +17,6 @@
     "esModuleInterop": true,
     "allowJs": true
   },
-  "include": ["src"],
+  "include": ["src", "scripts/updateData.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 } 

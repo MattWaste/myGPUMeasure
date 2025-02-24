@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && docker start gpu-database", 
+    "build": "tsc && vite build && docker start gpu-database",
     "preview": "vite preview",
     "server": "tsx src/index.ts",
     "start": "concurrently \"npm run server\" \"npm run dev\" \"docker start gpu-database \""
@@ -20,6 +20,8 @@
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.38.4",
     "express": "^4.21.2",
+    "node-cron": "^3.0.3",
+    "node-fetch": "^3.3.2",
     "pg": "^8.13.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -28,6 +30,8 @@
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
+    "@types/node-cron": "^3.0.11",
+    "@types/node-fetch": "^2.6.12",
     "@types/pg": "^8.11.11",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",

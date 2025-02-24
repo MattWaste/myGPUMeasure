@@ -40,7 +40,7 @@ export default function App() {
       <div className={`min-h-screen ${backgroundClass}`}>
       <nav className="bg-white shadow-lg dark:bg-gray-800">
   <div className="flex items-center justify-between px-8 py-6">
-    <h1 className="text-4xl dark:text-white"> My GPU Measure</h1>
+    <h1 className="text-4xl dark:text-white"> My GPU Power</h1>
     <div className="flex items-center space-x-4">
       <a 
         href="https://mattewest.com/"

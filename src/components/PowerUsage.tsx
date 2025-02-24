@@ -31,6 +31,9 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
   // Remove local state for GPU company and model
   const [selectedGPUModel, setSelectedGPUModel] = useState<string>('');
 
+  // Set text size for GPU details based on whether a specific GPU model is selected
+  const detailTextClass = selectedGPUModel ? 'text-md border-3' : 'text-sm';
+
   // Query to fetch Domestic Electricity Prices (CSV)
   const { data: electricityData, isLoading: electricityLoading, error: electricityError } = useQuery<ElectricityPrice[]>({
     queryKey: ['electricityPrices'],
@@ -120,7 +123,7 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
 
   return (
     <div className="container p-4 mx-auto dark:text-gray-100">
-      <h2 className="mb-4 text-2xl text-center dark:text-white atkinson-hyperlegible-mono-bold">
+      <h2 className="mb-4 text-3xl text-center dark:text-white atkinson-hyperlegible-mono-bold">
         Configure Your Setup
       </h2>
       {/* Inline Sentence Filters Section */}
@@ -195,7 +198,7 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
               onChange={(e) => setGpuWorkload(Number(e.target.value))}
               className="px-2 py-1 border rounded dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600"
             >
-              <option value={0.15}>Light* (.15)</option>
+              <option value={0.15}>Light* (.15)  </option>
               <option value={0.6}>Medium* (.6)</option>
               <option value={1}>Heavy* (1)</option>
             </select>
@@ -245,16 +248,14 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
             .filter((gpu: any) => !selectedGPUModel || gpu.name === selectedGPUModel)
             .map((gpu: any) => {
               const dailyCost = (gpu.tdp / 1000 * gpuWorkload) * gpuDailyUseage * effectivePrice;
-              const kiloWattUse = (gpu.tdp / 1000 * gpuWorkload);
               const monthlyCost = (gpu.tdp / 1000 * gpuWorkload) * gpuDailyUseage * 30 * effectivePrice;
               const annualCost = (gpu.tdp / 1000 * gpuWorkload) * gpuDailyUseage * 365 * effectivePrice;
               const annualCarbonCost = (gpu.tdp / 1000 * gpuWorkload) * gpuDailyUseage * 0.867 * 365;
               return (
-                <li key={gpu.id} className="p-2 border rounded dark:border-gray-700">
+                <li key={gpu.id} className="p-2 border-4 rounded dark:border-gray-700">
                   <div className="text-lg dark:text-white">{gpu.manufacturer} {gpu.name}</div>
-                  <div className="text-sm text-gray-600 dark:text-white">
-                    Kilowatts: {kiloWattUse.toFixed(2)} <br />
-                    Power Draw: {gpu.tdp}W<br />
+                  <div className={`${detailTextClass} text-gray-600 dark:text-white`}>
+                    <span className=''>Power Draw</span>: {gpu.tdp}W<br />
                     Daily Cost: ${dailyCost.toFixed(2)}<br />
                     Monthly Cost: ${monthlyCost.toFixed(2)}<br />
                     Annual Cost: ${annualCost.toFixed(2)}<br />
@@ -288,15 +289,17 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
 </button>
 {showSources && (
 <>
-<div className="text-center dark:text-white">
 <br></br>
-*Light = streaming (1080, some 4k), browsing, word processing, etc.<br></br>
-*Medium = casual gaming, 3D rendering (not real-time), light parallel computing etc.<br></br>
-*Heavy = AAA gaming, AI training, 3D rendering (realtime), heavy video editing, crypto mining etc.<br></br>
+<div className="italic text-center underline dark:text-white"> Load Note</div>
+<div className="italic text-center dark:text-white">
+<br></br>
+*Light = streaming, browsing, word processing  etc.<br></br>
+*Medium = gaming, light rendering, light editing etc.<br></br>
+*Heavy = AAA gaming, AI training, 3D, crypto mining etc.<br></br>
 <br></br>
 </div>
 
-  
+  <div className="italic text-center underline dark:text-white"> Sources</div><br></br>
   <div className="italic text-center dark:text-white">
     U.S. Energy Information Administration, Form EIA-861M, 'Monthly Electric Sales and Revenue With State Distributions Report.'
     U.S. Energy Information Administration, Form EIA-923, 'Power Plant Operations Report.'
