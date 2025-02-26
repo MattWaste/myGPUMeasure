@@ -290,7 +290,7 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
 {showSources && (
 <>
 <br></br>
-<div className="italic text-center underline dark:text-white"> Load Note</div>
+<div className="italic text-center underline dark:text-white"> Load </div>
 <div className="italic text-center dark:text-white">
 <br></br>
 *Light = streaming, browsing, word processing  etc.<br></br>
