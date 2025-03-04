@@ -40,7 +40,15 @@ export default function App() {
       <div className={`min-h-screen ${backgroundClass}`}>
       <nav className="bg-white shadow-lg dark:bg-gray-800">
   <div className="flex items-center justify-between px-8 py-6">
-    <h1 className="text-4xl dark:text-white"> My GPU Power</h1>
+  <h1 className="relative pb-2 text-4xl dark:text-white">
+  My GPU Power
+  {/* First line */}
+  <span className={`absolute bottom-[-6px] left-0 w-full h-1.5 rounded-full ${
+    selectedGPUCompany === 'AMD' ? 'bg-[#F14D53]' : 
+    selectedGPUCompany === 'Nvidia' ? 'bg-[#8EDE00]' :
+    selectedGPUCompany === 'Intel' ? 'bg-[#0088EC]' : 'bg-gray-500'
+  }`}></span>
+</h1>
     <div className="flex items-center space-x-4">
       <a 
         href="https://mattewest.com/"
