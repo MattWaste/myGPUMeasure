@@ -20,6 +20,8 @@ app.use(cors());
 const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, 'dist')));
 
+
+
 // Configure PostgreSQL connection.
 // In production, enable SSL (with rejectUnauthorized set to false) if needed.
 const pool = new Pool({

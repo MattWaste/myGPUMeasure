@@ -5,16 +5,18 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && docker start gpu-database",
-    "preview": "vite preview",
+    "build:client": "tsc && npx vite build",
+    "build:server": "tsc --project tsconfig.server.json",
+    "build:all": "npm run build:client && npm run build:server",
     "server": "tsx src/index.ts",
-    "start": "concurrently \"npm run server\" \"npm run dev\" \"docker start gpu-database \"",
-    "start:prod": "pm2 start ecosystem.config.js --env production",
+    "start": "concurrently \"npm run server\" \"npm run dev\" \"docker start gpu-database\"",
+    "start:prod": "NODE_ENV=production node dist/server/index.js",
+    "start:prod:pm2": "pm2 start ecosystem.config.js --env production",
     "stop:prod": "pm2 stop mygpupower",
     "restart:prod": "pm2 restart mygpupower",
     "logs:prod": "pm2 logs mygpupower",
     "status:prod": "pm2 status",
-    "deploy": "npm run build && npm run start:prod"
+    "deploy": "npm run build:all && npm run start:prod:pm2"
   },
   "dependencies": {
     "@libsql/client": "^0.14.0",
