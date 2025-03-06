@@ -50,7 +50,7 @@ app.get('/api/gpus', async (_req, res) => {
 
 // Catch-all route: serve the built client (SPA) for any other requests
 app.get('*', (_req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
 
 // Use the PORT from environment variables if provided, fallback to 3000
