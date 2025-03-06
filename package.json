@@ -9,7 +9,7 @@
     "build:server": "tsc --project tsconfig.server.json",
     "build:all": "npm run build:client && npm run build:server",
     "server": "tsx src/index.ts",
-    "start": "concurrently \"npm run server\" \"npm run dev\" \"docker start gpu-database\"",
+    "start": "concurrently \"npm run server\" \"npm run dev\" \"sudo docker start gpu-database\"",
     "start:prod": "NODE_ENV=production node dist/server/index.js",
     "start:prod:pm2": "pm2 start ecosystem.config.js --env production",
     "stop:prod": "pm2 stop mygpupower",
