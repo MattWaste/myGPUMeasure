@@ -5,6 +5,7 @@ import { drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
 import * as schema from './db/schema';
 import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
 
 // Load environment variables from .env
 dotenv.config();
@@ -16,14 +17,29 @@ if (!process.env.DATABASE_URL) {
 const app = express();
 app.use(cors());
 
-// Determine the current directory and serve static files from 'dist'
-const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, 'dist')));
+// Handle paths differently based on how the file is executed
+const isProd = process.env.NODE_ENV === 'production';
 
+// Determine paths for static files and index.html
+let staticPath;
+let indexPath;
 
+if (isProd) {
+  // In production, we're running compiled code in dist/server
+  // Static files are in dist/ (one level up)
+  staticPath = path.resolve(process.cwd(), 'dist');
+  indexPath = path.resolve(process.cwd(), 'dist/index.html');
+} else {
+  // In development
+  staticPath = path.resolve(process.cwd(), 'dist');
+  indexPath = path.resolve(process.cwd(), 'dist/index.html');
+}
 
-// Configure PostgreSQL connection.
-// In production, enable SSL (with rejectUnauthorized set to false) if needed.
+// Serve static files
+console.log(`Serving static files from: ${staticPath}`);
+app.use(express.static(staticPath));
+
+// Configure PostgreSQL connection
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
@@ -50,7 +66,8 @@ app.get('/api/gpus', async (_req, res) => {
 
 // Catch-all route: serve the built client (SPA) for any other requests
 app.get('*', (_req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'index.html'));
+  console.log(`Serving SPA from: ${indexPath}`);
+  res.sendFile(indexPath);
 });
 
 // Use the PORT from environment variables if provided, fallback to 3000
