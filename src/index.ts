@@ -5,6 +5,7 @@ import { drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
 import * as schema from './db/schema';
 import dotenv from 'dotenv';
+
 // Load environment variables from .env
 dotenv.config();
 
@@ -15,17 +16,30 @@ if (!process.env.DATABASE_URL) {
 const app = express();
 app.use(cors());
 
-// Determine the current directory and serve static files from 'dist'
-const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, 'dist')));
+// Determine paths for static files and index.html based on environment
+const isProd = process.env.NODE_ENV === 'production';
 
+// In production, running from dist/server/index.js, 
+// so static files are in the parent directory (dist/)
+// In development, running from project root, so static files are in dist/
+const projectRoot = process.cwd();
+const staticPath = path.join(projectRoot, 'dist');
+const indexPath = path.join(projectRoot, 'dist', 'index.html');
 
+console.log('Environment:', isProd ? 'production' : 'development');
+console.log('Project root:', projectRoot);
+console.log('Serving static files from:', staticPath);
+console.log('Index.html path:', indexPath);
+
+// Serve static files
+app.use(express.static(staticPath));
 
 // Configure PostgreSQL connection.
 // In production, enable SSL (with rejectUnauthorized set to false) if needed.
+const useSSL = process.env.DB_SSL === 'true' || (process.env.NODE_ENV === 'production' && process.env.DB_SSL !== 'false');
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+  ssl: useSSL ? { rejectUnauthorized: false } : false,
 });
 
 // Test the database connection
@@ -49,7 +63,8 @@ app.get('/api/gpus', async (_req, res) => {
 
 // Catch-all route: serve the built client (SPA) for any other requests
 app.get('*', (_req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'index.html'));
+  console.log(`Serving SPA from: ${indexPath}`);
+  res.sendFile(indexPath);
 });
 
 // Use the PORT from environment variables if provided, fallback to 3000
