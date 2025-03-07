@@ -43,7 +43,7 @@ export default function App() {
   <h1 className="relative pb-2 text-4xl dark:text-white">
   My GPU Power
   {/* First line */}
-  <span className={`absolute bottom-[-6px] left-0 w-full h-1.5 rounded-full ${
+  <span className={` max-[457px]:w-24 w-full absolute bottom-[-6px] left-0  h-1.5 rounded-full ${
     selectedGPUCompany === 'AMD' ? 'bg-[#F14D53]' : 
     selectedGPUCompany === 'Nvidia' ? 'bg-[#8EDE00]' :
     selectedGPUCompany === 'Intel' ? 'bg-[#0088EC]' : 'bg-gray-500'

@@ -14,16 +14,51 @@ if (!process.env.VITE_EIA_API_KEY) {
 
 export async function fetchAndSaveElectricityPrices() {
   try {
+    console.log('Fetching latest electricity prices...');
+    
+    // Get the current date and calculate a date 18 months ago to limit query
+    const now = new Date();
+    const startDate = new Date(now);
+    startDate.setMonth(now.getMonth() - 18);
+    const startDateString = startDate.toISOString().split('T')[0].substring(0, 7); // Format as YYYY-MM
+    
+    // First, let's get the latest available period
+    const latestResponse = await fetchEIAData('electricity/retail-sales/data', {
+      frequency: 'monthly',
+      data: ['price'],
+      sectorid: ['RES'],
+      // Sort by period (newest first) and get just one record
+      sort: 'period',
+      direction: 'desc',
+      length: 1
+    });
+    
+    // Extract the latest period
+    const latestPeriod = latestResponse.response?.data?.[0]?.period;
+    console.log(`Latest available period: ${latestPeriod}`);
+    
+    // Now fetch all data from recent months to ensure we get the latest data for each state
     const response = await fetchEIAData('electricity/retail-sales/data', {
       frequency: 'monthly',
       data: ['price'],
-      sectorid: ['RES']
+      sectorid: ['RES'],
+      start: startDateString,
+      sort: 'period',
+      direction: 'desc',
+      length: 1000  // This should be enough to get recent data for all states
     });
+
+    if (!response.response || !response.response.data || !Array.isArray(response.response.data)) {
+      throw new Error('Invalid response format from EIA API');
+    }
+    
+    console.log(`Received ${response.response.data.length} records from EIA API`);
 
     // Filter records to only those with a valid 2-letter state ID
     const filteredRecords = response.response.data.filter((item: any) => item.stateid.length === 2);
+    console.log(`Found ${filteredRecords.length} records with valid state IDs`);
 
-    // Reduce records to keep only the most recent period per state.
+    // Reduce records to keep only the most recent period per state
     const latestMap = filteredRecords.reduce((acc: Record<string, any>, item: any) => {
       const state = item.stateid;
       const itemDate = new Date(item.period + '-01');
@@ -46,14 +81,32 @@ export async function fetchAndSaveElectricityPrices() {
       period: item.period
     }));
 
-    const csvPath = path.join(process.cwd(), 'data', 'electricity_prices.csv');
+    console.log(`Processed latest prices for ${prices.length} states`);
+    
+    // Make sure the data directory exists
+    const dataDir = path.join(process.cwd(), 'data');
+    try {
+      await fs.access(dataDir);
+    } catch {
+      await fs.mkdir(dataDir, { recursive: true });
+    }
+
+    const csvPath = path.join(dataDir, 'electricity_prices.csv');
     await fs.writeFile(csvPath, stringify(prices, { header: true }));
 
+    // Also copy to public directory for immediate use
+    const publicPath = path.join(process.cwd(), 'public', 'electricity_prices.csv');
+    await fs.writeFile(publicPath, stringify(prices, { header: true }));
+
     console.log('Electricity prices updated with the latest period per state:', new Date().toISOString());
+    console.log(`CSV files saved to ${csvPath} and ${publicPath}`);
   } catch (error) {
     console.error('Failed to update electricity prices:', error);
     process.exit(1);
   }
 }
 
-fetchAndSaveElectricityPrices();
+// Self-execute when run directly
+if (require.main === module) {
+  fetchAndSaveElectricityPrices();
+}

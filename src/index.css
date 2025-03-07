@@ -3,12 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.atkinson-hyperlegible-mono {  /* replaced <uniquifier> with "bold" and <weight> with 700 */
-    font-family: "Atkinson Hyperlegible Mono", serif;
-    font-optical-sizing: auto;
-    font-weight: 700;
-    font-style: bold;
-}
 
 
 .roboto-mono- {

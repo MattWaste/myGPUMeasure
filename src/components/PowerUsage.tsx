@@ -32,7 +32,6 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
   const [selectedGPUModel, setSelectedGPUModel] = useState<string>('');
 
   // Set text size for GPU details based on whether a specific GPU model is selected
-  const detailTextClass = selectedGPUModel ? 'text-md border-3' : 'text-sm';
 
   // Query to fetch Domestic Electricity Prices (CSV)
   const { data: electricityData, isLoading: electricityLoading, error: electricityError } = useQuery<ElectricityPrice[]>({
@@ -123,7 +122,7 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
 
   return (
     <div className="container p-4 mx-auto dark:text-gray-100">
-      <h2 className="mb-4 text-3xl text-center dark:text-white atkinson-hyperlegible-mono-bold">
+      <h2 className="mb-4 text-3xl text-center dark:text-white">
         Configure Your Setup
       </h2>
       {/* Inline Sentence Filters Section */}
@@ -239,10 +238,10 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
 
       {/* GPU Data Section */}
       <section>
-        <h2 className="mb-2 text-xl text-center dark:text-white">
+        <h2 className="mb-2 text-2xl text-center dark:text-white">
           GPU Power Costs in {locationLabel}
         </h2>
-        <ul className="space-y-2">
+        <ul className="space-y-2 text-1.5"> 
           {gpuData
             .filter((gpu: any) => !selectedGPUCompany || gpu.manufacturer === selectedGPUCompany)
             .filter((gpu: any) => !selectedGPUModel || gpu.name === selectedGPUModel)
@@ -252,23 +251,55 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
               const annualCost = (gpu.tdp / 1000 * gpuWorkload) * gpuDailyUseage * 365 * effectivePrice;
               const annualCarbonCost = (gpu.tdp / 1000 * gpuWorkload) * gpuDailyUseage * 0.867 * 365;
               return (
-                <li key={gpu.id} className="p-2 border-4 rounded dark:border-gray-700">
-                  <div className="text-lg dark:text-white">{gpu.manufacturer} {gpu.name}</div>
-                  <div className={`${detailTextClass} text-gray-600 dark:text-white`}>
-                    <span className=''>Power Draw</span>: {gpu.tdp}W<br />
-                    Daily Cost: ${dailyCost.toFixed(2)}<br />
-                    Monthly Cost: ${monthlyCost.toFixed(2)}<br />
-                    Annual Cost: ${annualCost.toFixed(2)}<br />
-                    {selectedCountry === 'USA' ? (
-                      <div>
-                        Annual Carbon Cost: {annualCarbonCost.toFixed(2)} lbs of CO₂
-                      </div>
-                    ) : (
-                      <div>
-                        Annual Carbon Cost: not enough data
-                      </div>
-                    )}
+                <li key={gpu.id} className={`p-2 border-4 rounded dark:border-gray-700 ${selectedGPUModel ? 'shadow-md' : ''}`}>
+                  <div className={`${selectedGPUModel ? 'text-xl mb-2' : 'text-lg'} pt-2 dark:text-white`}>
+                    {gpu.manufacturer} {gpu.name}
                   </div>
+                  
+                  {selectedGPUModel ? (
+                    <div className="flex flex-col p-4 space-y-3 text-lg text-gray-600 dark:text-white">
+                      <div className="flex justify-between pb-2 border-b border-gray-300 dark:border-gray-700">
+                        <span>Power Draw:</span> <span>{gpu.tdp}W</span>
+                      </div>
+                      <div className="flex justify-between pb-2 border-b border-gray-300 dark:border-gray-700">
+                        <span>Daily Cost:</span> <span className="">${dailyCost.toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between pb-2 border-b border-gray-300 dark:border-gray-700">
+                        <span>Monthly Cost:</span> <span className="">${monthlyCost.toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between pb-2 border-b border-gray-300 dark:border-gray-700">
+                        <span>Annual Cost:</span> <span className="text-lg ">${annualCost.toFixed(2)}</span>
+                      </div>
+                      {selectedCountry === 'USA' ? (
+                        <div className="flex justify-between pt-1">
+                          <span>Annual Carbon Cost:</span> 
+                          <span className="">{annualCarbonCost.toFixed(2)} lbs of CO₂</span>
+                        </div>
+                      ) : (
+                        <div className="flex justify-between pt-1">
+                          <span>Annual Carbon Cost:</span>
+                          <span className="italic">not enough data</span>
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    // Simple format for multiple GPU listing
+                    <div className="text-sm text-gray-600 dark:text-white">
+                      <span>Power Draw</span>: {gpu.tdp}W<br />
+                      Daily Cost: ${dailyCost.toFixed(2)}<br />
+                      Monthly Cost: ${monthlyCost.toFixed(2)}<br />
+                      Annual Cost: ${annualCost.toFixed(2)}<br />
+                      {selectedCountry === 'USA' ? (
+                        <div>
+                          Annual Carbon Cost: {annualCarbonCost.toFixed(2)} lbs of CO₂
+                        </div>
+                      ) : (
+                        <div>
+                          Annual Carbon Cost: not enough data
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </li>
               );
             })}
@@ -300,7 +331,7 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
 </div>
 
   <div className="italic text-center underline dark:text-white"> Sources</div><br></br>
-  <div className="italic text-center dark:text-white">
+  <div className="italic text-center break-words dark:text-white">
     U.S. Energy Information Administration, Form EIA-861M, 'Monthly Electric Sales and Revenue With State Distributions Report.'
     U.S. Energy Information Administration, Form EIA-923, 'Power Plant Operations Report.'
     <br></br>

@@ -14,8 +14,10 @@ export interface EIAQueryParams {
   start?: string;
   end?: string;
   offset?: number;
-  length?: number;
+  length?: number | string;
   sectorid?: string[];
+  sort?: string;
+  direction?: 'asc' | 'desc';
 }
 
 export const fetchEIAData = async (
@@ -46,12 +48,17 @@ export const fetchEIAData = async (
     queryParams.append('offset', params.offset.toString());
   }
 
-  if (params.length !== undefined) {
+  if (params.length) {
     queryParams.append('length', params.length.toString());
   }
 
   if (params.sectorid && params.sectorid.length > 0) {
     params.sectorid.forEach(s => queryParams.append('facets[sectorid][]', s));
+  }
+
+  if (params.sort) {
+    queryParams.append('sort[0][column]', params.sort);
+    queryParams.append('sort[0][direction]', params.direction || 'desc');
   }
 
   const url = `${EIA_BASE_URL}/${endpoint}?${queryParams.toString()}`;
