@@ -250,6 +250,9 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
               const monthlyCost = (gpu.tdp / 1000 * gpuWorkload) * gpuDailyUseage * 30 * effectivePrice;
               const annualCost = (gpu.tdp / 1000 * gpuWorkload) * gpuDailyUseage * 365 * effectivePrice;
               const annualCarbonCost = (gpu.tdp / 1000 * gpuWorkload) * gpuDailyUseage * 0.867 * 365;
+              
+              
+              
               return (
                 <li key={gpu.id} className={`p-2 border-4 rounded dark:border-gray-700 ${selectedGPUModel ? 'shadow-md' : ''}`}>
                   <div className={`${selectedGPUModel ? 'text-xl mb-2' : 'text-lg'} pt-2 dark:text-white`}>
@@ -271,16 +274,21 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
                         <span>Annual Cost:</span> <span className="text-lg ">${annualCost.toFixed(2)}</span>
                       </div>
                       {selectedCountry === 'USA' ? (
-                        <div className="flex justify-between pt-1">
-                          <span>Annual Carbon Cost:</span> 
-                          <span className="">{annualCarbonCost.toFixed(2)} lbs of CO₂</span>
-                        </div>
-                      ) : (
-                        <div className="flex justify-between pt-1">
-                          <span>Annual Carbon Cost:</span>
-                          <span className="italic">not enough data</span>
-                        </div>
-                      )}
+  <div className="flex justify-between pt-1">
+    <span>Annual Carbon Cost:</span> 
+    <span className="text-right">
+      {annualCarbonCost.toFixed(2)}
+      <span className="hidden sm:inline">&nbsp;</span>
+      <br className="sm:hidden" />
+      <span className="sm:inline">lbs of CO₂</span>
+    </span>
+  </div>
+) : (
+  <div className="flex justify-between pt-1">
+    <span>Annual Carbon Cost:</span>
+    <span className="italic text-right">not enough data</span>
+  </div>
+)}
                     </div>
                   ) : (
                     // Simple format for multiple GPU listing
@@ -337,6 +345,9 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
     <br></br>
     <br></br>
     EPA (2024). eGRID. Table 1: Subregion Output Emission Rates (eGRID2022), year 2022 data. U.S. Environmental Protection Agency, Washington, DC.
+    <br></br>
+    <br></br>
+    U.S. Environmental Protection Agency. Greenhouse Gas Equivalencies Calculator. U.S. EPA, n.d., https://www.epa.gov/energy/greenhouse-gas-equivalencies-calculator.
     <br></br>
     <br></br>
     GlobalPetrolPrices.com. "Electricity Prices." GlobalPetrolPrices.com, 2025, https://www.globalpetrolprices.com/electricity_prices/.
