@@ -5,7 +5,6 @@ module.exports = {
     env: {
       NODE_ENV: "production",
       PORT: 3000,
-      DATABASE_URL: "postgres://postgres:password@localhost:5432/postgres",
       DB_SSL: "false"
     },
     instances: 1,

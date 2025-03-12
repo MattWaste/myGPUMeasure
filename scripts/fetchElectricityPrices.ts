@@ -37,7 +37,7 @@ export async function fetchAndSaveElectricityPrices() {
     const latestPeriod = latestResponse.response?.data?.[0]?.period;
     console.log(`Latest available period: ${latestPeriod}`);
     
-    // Now fetch all data from recent months to ensure we get the latest data for each state
+    // fetch all data from recent months
     const response = await fetchEIAData('electricity/retail-sales/data', {
       frequency: 'monthly',
       data: ['price'],
@@ -45,7 +45,7 @@ export async function fetchAndSaveElectricityPrices() {
       start: startDateString,
       sort: 'period',
       direction: 'desc',
-      length: 1000  // This should be enough to get recent data for all states
+      length: 1000  
     });
 
     if (!response.response || !response.response.data || !Array.isArray(response.response.data)) {
@@ -54,11 +54,11 @@ export async function fetchAndSaveElectricityPrices() {
     
     console.log(`Received ${response.response.data.length} records from EIA API`);
 
-    // Filter records to only those with a valid 2-letter state ID
+    // Filter to 2-letter state ID
     const filteredRecords = response.response.data.filter((item: any) => item.stateid.length === 2);
     console.log(`Found ${filteredRecords.length} records with valid state IDs`);
 
-    // Reduce records to keep only the most recent period per state
+    // Reduce to most recent period per state
     const latestMap = filteredRecords.reduce((acc: Record<string, any>, item: any) => {
       const state = item.stateid;
       const itemDate = new Date(item.period + '-01');

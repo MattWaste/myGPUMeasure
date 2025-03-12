@@ -3,14 +3,13 @@ set -e  # Exit if any command fails
 
 echo "========== Starting deployment: $(date) =========="
 
-# echo "Pulling latest code..."
-# git pull origin main  # Updated to 'main' instead of 'master' (adjust if different)
+# git pull origin master
 
 echo "Installing dependencies..."
 npm install
 
 echo "Building project..."
-npm run build:all  # Updated to build:all to match your package.json
+npm run build:all  
 
 echo "Ensuring logs directory exists..."
 mkdir -p logs
@@ -25,7 +24,7 @@ echo "Starting Docker container..."
 docker run -d --restart unless-stopped --name gpu-database -p 5432:5432 mypostgres
 
 echo "Waiting for database to initialize..."
-sleep 5  # Give PostgreSQL a moment to start
+sleep 5  
 
 echo "Starting/restarting application with PM2..."
 # Check if app is already running in PM2
@@ -41,11 +40,11 @@ echo "Saving PM2 process list..."
 pm2 save
 
 echo "Checking if PM2 startup is configured..."
-# Only run pm2 startup if it hasn't been configured
+
 if ! systemctl list-unit-files | grep -q "pm2-ubuntu"; then
   echo "Setting up PM2 to start on system boot..."
   pm2 startup
-  # Note: You'll need to run the command PM2 outputs manually once
+  #  need to run the command PM2 outputs manually once
 fi
 
 echo "Testing API endpoint..."
