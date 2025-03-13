@@ -3,6 +3,10 @@
 
 My GPU Measure is a GPU measurement application that allows users to get detailed information on GPU power draw, electricity costs, and carbon emissions based on specific usage and location. It supports both domestic (state-level) and international electricity price data and provides an interactive UI for exploring GPU metrics.
 
+
+## Live Site
+https://mygpupower.com/ 
+
 ## Features
 
 - **GPU Power Analysis:** Displays power draw, cost (daily, monthly, annual), and carbon emissions for various GPU models.
