@@ -22,7 +22,7 @@ export async function fetchAndSaveElectricityPrices() {
     startDate.setMonth(now.getMonth() - 18);
     const startDateString = startDate.toISOString().split('T')[0].substring(0, 7); // Format as YYYY-MM
     
-    // First, let's get the latest available period
+    //get the latest available period
     const latestResponse = await fetchEIAData('electricity/retail-sales/data', {
       frequency: 'monthly',
       data: ['price'],

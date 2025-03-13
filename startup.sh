@@ -20,8 +20,24 @@ docker build -t mypostgres .
 echo "Stopping existing container (if any)..."
 docker rm -f gpu-database || true
 
+# Load environment variables from .env file
+echo "Loading environment variables..."
+if [ -f .env ]; then
+  export $(grep -v '^#' .env | xargs)
+else
+  echo "Warning: .env file not found. Using default values."
+  export POSTGRES_USER=postgres
+  export POSTGRES_PASSWORD=default_password
+  export POSTGRES_DB=postgres
+fi
+
 echo "Starting Docker container..."
-docker run -d --restart unless-stopped --name gpu-database -p 5432:5432 mypostgres
+docker run -d --restart unless-stopped --name gpu-database \
+  -p 5432:5432 \
+  -e POSTGRES_USER="$POSTGRES_USER" \
+  -e POSTGRES_PASSWORD="$POSTGRES_PASSWORD" \
+  -e POSTGRES_DB="$POSTGRES_DB" \
+  mypostgres
 
 echo "Waiting for database to initialize..."
 sleep 5  

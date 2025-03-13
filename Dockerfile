@@ -6,9 +6,9 @@ COPY ./public/electricity_prices.csv /docker-entrypoint-initdb.d/
 COPY ./public/international_power_draw_6_2024.csv /docker-entrypoint-initdb.d/
 
 # Set environment variables for PostgreSQL
-ENV POSTGRES_USER=postgres
-ENV POSTGRES_PASSWORD=password
-ENV POSTGRES_DB=postgres
+# ENV POSTGRES_USER=postgres
+# ENV POSTGRES_PASSWORD=password
+# ENV POSTGRES_DB=postgres
 
 # Copy initialization script
 COPY init.sql /docker-entrypoint-initdb.d/
