@@ -78,10 +78,6 @@ This project is licensed under the MIT License.
 
 ## Acknowledgments
 
-- [React Query](https://tanstack.com/query/latest)
-- [Drizzle ORM](https://orm.drizzle.team/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- Thanks to all contributors who help maintain this project.
 
 
 
