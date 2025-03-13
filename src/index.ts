@@ -20,7 +20,6 @@ app.use(cors());
 const isProd = process.env.NODE_ENV === 'production';
 
 // In production, running from dist/server/index.js, 
-// so static files are in the parent directory (dist/)
 // In development, running from project root, so static files are in dist/
 const projectRoot = process.cwd();
 const staticPath = path.join(projectRoot, 'dist');
@@ -67,13 +66,11 @@ app.get('*', (_req, res) => {
   res.sendFile(indexPath);
 });
 
-// Use the PORT from environment variables if provided, fallback to 3000
 const PORT = process.env.PORT || 3000;
 const server = app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
 
-// Graceful shutdown: close the HTTP server and database pool when terminating
 process.on('SIGTERM', () => {
   console.log('SIGTERM signal received: closing HTTP server');
   server.close(() => {

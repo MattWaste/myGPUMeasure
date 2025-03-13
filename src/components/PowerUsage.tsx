@@ -31,7 +31,6 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
   // Remove local state for GPU company and model
   const [selectedGPUModel, setSelectedGPUModel] = useState<string>('');
 
-  // Set text size for GPU details based on whether a specific GPU model is selected
 
   // Query to fetch Domestic Electricity Prices (CSV)
   const { data: electricityData, isLoading: electricityLoading, error: electricityError } = useQuery<ElectricityPrice[]>({
@@ -291,7 +290,7 @@ export default function PowerUsage({ selectedGPUCompany, onCompanyChange }: Powe
 )}
                     </div>
                   ) : (
-                    // Simple format for multiple GPU listing
+               
                     <div className="text-sm text-gray-600 dark:text-white">
                       <span>Power Draw</span>: {gpu.tdp}W<br />
                       Daily Cost: ${dailyCost.toFixed(2)}<br />
