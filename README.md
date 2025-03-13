@@ -1,3 +1,4 @@
+# ![GPU BIG](https://github.com/user-attachments/assets/021b2aa0-9936-4a23-b2a7-3c736d8bfbb1) 
 # My GPU Measure
 
 My GPU Measure is a GPU measurement application that allows users to get detailed information on GPU power draw, electricity costs, and carbon emissions based on specific usage and location. It supports both domestic (state-level) and international electricity price data and provides an interactive UI for exploring GPU metrics.
@@ -13,11 +14,11 @@ My GPU Measure is a GPU measurement application that allows users to get detaile
 
 ## Project Structure
 
-- **Client:** Located in `src/` (React application using Vite).
-- **Server:** Located in `src/index.ts` which runs an Express server.
-- **Database:** PostgreSQL database managed with [Drizzle ORM](https://orm.drizzle.team/) (see [src/db/schema.ts](src/db/schema.ts)).
-- **Data Scripts:** See [scripts/fetchElectricityPrices.ts](scripts/fetchElectricityPrices.ts) for fetching external electricity data.
-- **Docker Integration:** See [Dockerfile](Dockerfile) for containerizing the database.
+- **Client:** Located in `src/` (React application built with Vite).
+- **Server:** Located in `src/index.ts` and runs an Express server.
+- **Database:** Managed with PostgreSQL via [Drizzle ORM](https://orm.drizzle.team/) (see [src/db/schema.ts](src/db/schema.ts)).
+- **Data Scripts:** See [scripts/fetchElectricityPrices.ts](scripts/fetchElectricityPrices.ts) for external data fetching.
+- **Docker Integration:** Configuration available in [Dockerfile](Dockerfile) for containerizing the database.
 - **Deployment:** Managed via PM2 with configuration in [ecosystem.config.js](ecosystem.config.js).
 
 ## Getting Started
@@ -26,24 +27,61 @@ My GPU Measure is a GPU measurement application that allows users to get detaile
 
 - Node.js and npm
 - Docker
-- PostgreSQL (containerized via Docker is recommended)
+- PostgreSQL (using the containerized version is recommended)
 
 ### Installation
 
-1. Clone the repository.
+1. Clone the repository:
+   ```bash
+   git clone <repository_url>
+   cd myGPUMeasure
+   ```
 2. Install dependencies:
-
+   ```bash
    npm install
-      
-4. Environmental Variable setup:
-# .env
-VITE_GPU_DB="file:gpu_db.db"
-VITE_EIA_API_KEY='your_eia_api_key'
-DATABASE_URL='post_gres_url_
-DB_SSL=false
-POSTGRES_USER='your_user'
-POSTGRES_PASSWORD='your_password'
-POSTGRES_DB='your_db_name'
+   ```
+3. Set up environmental variables by creating a `.env` file:
+   ```
+   VITE_GPU_DB="file:gpu_db.db"
+   VITE_EIA_API_KEY='your_eia_api_key'
+   DATABASE_URL='postgres_url'
+   DB_SSL=false
+   POSTGRES_USER='your_user'
+   POSTGRES_PASSWORD='your_password'
+   POSTGRES_DB='your_db_name'
+   ```
+4. Run database migrations and seed data (if applicable):
+   ```bash
+   npm run migrate
+   npm run seed
+   ```
+
+### Running the Application
+
+- **Development Mode:**
+  ```bash
+  npm run dev
+  ```
+- **Production Build:**
+  ```bash
+  npm run build
+  npm start
+  ```
+
+## Contributing
+
+Contributions are welcome! Please fork the repository and create a pull request. For major changes, open an issue first to discuss what you would like to change.
+
+## License
+
+This project is licensed under the MIT License.
+
+## Acknowledgments
+
+- [React Query](https://tanstack.com/query/latest)
+- [Drizzle ORM](https://orm.drizzle.team/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- Thanks to all contributors who help maintain this project.
 
 
 
