@@ -76,9 +76,7 @@ https://mygpupower.com/
 
 Contributions are welcome! Please fork the repository and create a pull request. For major changes, open an issue first to discuss what you would like to change.
 
-## License
 
-This project is licensed under the MIT License.
 
 ## Acknowledgments
 - Ai was used in this project
