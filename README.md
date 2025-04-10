@@ -3,9 +3,9 @@
 
 My GPU Measure is a GPU measurement application that allows users to get detailed information on GPU power draw, electricity costs, and carbon emissions based on specific usage and location. It supports both domestic (state-level) and international electricity price data and provides an interactive UI for exploring GPU metrics.
 
-
 ## Live Site
-https://mygpupower.com/ 
+
+https://mygpupower.com/
 
 ## Features
 
@@ -36,10 +36,12 @@ https://mygpupower.com/
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone <repository_url>
    cd myGPUMeasure
    ```
+
 2. Install dependencies:
    ```bash
    npm install
@@ -71,11 +73,6 @@ https://mygpupower.com/
   npm run build
   npm start
   ```
-
-## Contributing
-
-Contributions are welcome! Please fork the repository and create a pull request. For major changes, open an issue first to discuss what you would like to change.
-
 
 
 ## Acknowledgments
