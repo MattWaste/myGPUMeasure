@@ -3,6 +3,13 @@ Nvidia,GeForce RTX 5090,575
 Nvidia,GeForce RTX 5080,360
 Nvidia,GeForce RTX 5070 Ti,300
 Nvidia,GeForce RTX 5070,250
+Nvidia,GeForce RTX 5060 Ti,180
+Nvidia,GeForce RTX 5060,150
+Nvidia,GeForce RTX 5050,130
+Nvidia, RTX PRO 6000,600 
+Nvidia, RTX PRO 5000,300
+Nvidia,RTX PRO 4500, 200
+Nvidia,RTX PRO 4000, 140
 Nvidia,H100,700
 Nvidia,A100,300
 Nvidia,RTX A6000,300
@@ -57,6 +64,10 @@ Nvidia,GeForce GTX 960,120
 Nvidia,GeForce GTX 950,90
 AMD,Radeon™ PRO 9070 XT,295
 AMD,Radeon™ PRO 9070,220
+AMD,Radeon™ AI PRO R9700,300
+AMD,Radeon™ PRO 9060 XT,160
+AMD,Radeon™ PRO 9060 XT (8 GB),150
+AMD,Radeon™ PRO 9060,132
 AMD,Radeon™ PRO W7900,295
 AMD,Radeon™ PRO W7800,260
 AMD,Radeon™ PRO W7700,190
