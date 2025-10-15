@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Sitemap: https://mygpupower.com/sitemap.xml
+
+# Block unnecessary paths
+Disallow: /api/
+Disallow: /logs/
